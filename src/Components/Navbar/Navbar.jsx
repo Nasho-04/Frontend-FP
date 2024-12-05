@@ -3,16 +3,12 @@ import './Navbar.css'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useGlobalContext } from '../../GlobalContext.jsx'
+import NavList from '../NavList/NavList.jsx'
 
 const Navbar = () => {
-    const { products, showResults, setShowResults } = useGlobalContext()
+    const { products, showResults, setShowResults, condicionMenu, setCondicionMenu } = useGlobalContext()
     const [search, setSearch] = useState('')
     const navigate = useNavigate()
-    const logout = () => {
-        sessionStorage.removeItem('access_token')
-        sessionStorage.removeItem('user_info')
-        sessionStorage.removeItem('cart')
-    }
 
     const searchProduct = () => {
         if (search) {
@@ -35,14 +31,17 @@ const Navbar = () => {
                     </ul>
                     : null}
             </div>
-            <div className='navbar-list-container'  onClick={() => setShowResults(false)}>
-                <ul className='navbar-list'>
-                    <li><Link to='/home'>Home</Link></li>
-                    <li><a href="#footer">Contact</a></li>
-                    <li><Link to='/product/new'>Add Product</Link></li>
-                    <li><Link to='/' onClick={logout}>Logout</Link></li>
-                </ul>
+            <div className='navbar-no-responsive-container'>
+                <NavList className='navbar-no-responsive-list' />
             </div>
+            <div className='navbar-responsive-container' style={{ display: condicionMenu ? 'flex' : 'none' }} >
+                <NavList className='navbar-responsive-list'/>
+            </div>
+            <span className='navbar-menu' onClick={() => setCondicionMenu(!condicionMenu)}>
+                {condicionMenu
+                    ? <i className="bi bi-x-lg"></i>
+                    : <i className="bi bi-list"></i>}
+            </span>
         </nav>
     )
 }

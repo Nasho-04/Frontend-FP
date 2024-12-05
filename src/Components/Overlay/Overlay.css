@@ -43,7 +43,7 @@
     padding: 10px 20px;
     background-color: #555;
     color: #fefefe;
-    border: 1px solid #fff;
+    border: 1px solid #111;
     border-radius: 5px;
     font-size: 20px;
     cursor: pointer;
@@ -62,7 +62,6 @@
 .delete-product-buttons .cancel {
     background-color: #eee;
     color: #333;
-    border: 1px solid #111;
 }
 
 .delete-product-buttons .cancel:hover {

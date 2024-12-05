@@ -6,6 +6,7 @@ const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
     const [products, setProducts] = useState([])
+    const [condicionMenu, setCondicionMenu] = useState(false)
     const getProducts = async () => {
         try {
             const response = await GET('http://localhost:2000/api/products/')
@@ -52,6 +53,13 @@ export const GlobalContextProvider = ({ children }) => {
             setCart(cart)
         }
     }, [])
+    
+    const logout = () => {
+        setCondicionMenu(false)
+        sessionStorage.removeItem('access_token')
+        sessionStorage.removeItem('user_info')
+        sessionStorage.removeItem('cart')
+    }
 
     return (
         <GlobalContext.Provider value={{
@@ -64,6 +72,9 @@ export const GlobalContextProvider = ({ children }) => {
             cart,
             count,
             setCount,
+            condicionMenu,
+            setCondicionMenu,
+            logout
         }}>
             {children}
         </GlobalContext.Provider>
