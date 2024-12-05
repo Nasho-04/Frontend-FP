@@ -140,3 +140,87 @@
     text-decoration: underline;
     text-underline-offset: 2px;
 }
+
+@media screen and (max-width: 550px) {
+    .login-container {
+        width: 300px;
+        height: 380px;
+    }
+
+    .login-title {
+        font-size: 22px;
+    }
+
+    .login-input {
+        font-size: 12px;
+        height: 30px;
+    }
+
+    .login-form-field {
+        margin-bottom: 4px;
+        width: 90%;
+    }
+
+    .login-form-field label {
+        font-size: 11px;
+    }
+
+    .login-button {
+        font-size: 14px;
+        width: 90%;
+    }
+
+    .login-button-container {
+        margin-top: 10px;
+    }
+
+    .login-link-container {
+        font-size: 14px;
+    }
+
+    .login-span {
+        width: 90%;
+    }
+
+    .login-error {
+        font-size: 12px;
+        width: 90%;
+        margin: 2px 0;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .login-container {
+        width: 250px;
+        height: 340px;
+    }
+
+    .login-title {
+        font-size: 20px;
+    }
+
+    .login-input {
+        font-size: 10px;
+        height: 25px;
+    }
+
+    .login-form-field {
+        margin-bottom: 4px;
+    }
+
+    .login-form-field label {
+        font-size: 10px;
+    }
+
+    .login-button {
+        padding: 8px 16px;
+    }
+
+    .login-link-container {
+        font-size: 13px;
+    }
+
+    .login-error {
+        font-size: 10px;
+    }
+}
