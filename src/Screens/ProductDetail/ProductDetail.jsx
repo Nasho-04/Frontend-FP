@@ -7,14 +7,22 @@ import './ProductDetail.css'
 import { extractFormData } from '../../utils/ExtractData.js'
 import { useGlobalContext } from '../../GlobalContext.jsx'
 import Cart from '../../Components/Cart/Cart.jsx'
+import Overlay from '../../Components/Overlay/Overlay.jsx'
+import { useNavigate } from 'react-router-dom'
 
 const ProductDetail = () => {
     const { product_id } = useParams()
     const [product, setProduct] = useState({})
-    const { image, handleChangeFile } = useGlobalContext()
+    const { image, handleChangeFile, setImage } = useGlobalContext()
     const user_info = JSON.parse(sessionStorage.getItem('user_info'))
     const authorized = product.seller_id === user_info.id  || user_info.role === 'admin'
     const [editMode, setEditMode] = useState(false)
+    const [toggleAdd, setToggleAdd] = useState(false)
+    const [toggleDelete, setToggleDelete] = useState(false)
+    const [deleteConfirm, setDeleteConfirm] = useState(false)
+    const [editConfirm, setEditConfirm] = useState(false)
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getProduct = async () => {
@@ -40,6 +48,9 @@ const ProductDetail = () => {
             const formValuesObject = extractFormData(formFields, formValues)
             formValuesObject.image = image
             const response = await PUT(`http://localhost:2000/api/products/edit/${product_id}`, formValuesObject)
+            setImage('')
+            setEditConfirm(true)
+            setEditMode(false)
             console.log(response)
             if (response.ok) {
                 console.log(response.message)
@@ -49,16 +60,18 @@ const ProductDetail = () => {
         }
     }
 
-    const handleDeleteProduct = async () => {
+    const handleDeleteProduct = async (product_id) => {
         const response = await DELETE(`http://localhost:2000/api/products/${product_id}`)
-        console.log(response)
+        if (response.ok) {
+            setToggleDelete(false)
+            setDeleteConfirm(true)
+        }
     }
 
     const addToCart = () => {
         const cart = JSON.parse(sessionStorage.getItem('cart'))
         let included = false
         for (const item in cart) {
-            console.log(cart[item]._id)
             if (cart[item]._id === product_id) {
                 included = true
             }
@@ -66,6 +79,7 @@ const ProductDetail = () => {
         if (!included) {
             cart.push(product)
             sessionStorage.setItem('cart', JSON.stringify(cart))
+            window.location.reload()
         }
     }
 
@@ -82,9 +96,9 @@ const ProductDetail = () => {
                     <p className='product-detail-stock'>Available stock: {product.stock}</p>
                     <p className='product-detail-description'>{product.description}</p>
                     <div className='product-detail-button-container'>
-                        {authorized && <button className='product-detail-button' onClick={addToCart}>Add to Cart</button>}
+                        {authorized && <button className='product-detail-button' onClick={() => setToggleAdd(true)}>Add to Cart</button>}
                         {authorized && <button className='product-detail-button edit-button' onClick={() => setEditMode(!editMode)}>Edit Product</button>}
-                        {authorized && <button className='product-detail-button delete-button' onClick={handleDeleteProduct}>Delete Product</button>}
+                        {authorized && <button className='product-detail-button delete-button' onClick={() => setToggleDelete(true)}>Delete Product</button>}
                     </div>
                 </div>
             </div>
@@ -140,6 +154,10 @@ const ProductDetail = () => {
                 </form>
             </div>
             <Cart />
+            <Overlay toggle={toggleAdd} setToggle={setToggleAdd} product={product} btnFunction={addToCart} btnText1="Confirm" btnText2="Cancel" text="Are you sure you want to add this product?" />
+            <Overlay toggle={toggleDelete} setToggle={setToggleDelete} product={product} btnFunction={handleDeleteProduct} btnText1="Confirm" btnText2="Cancel" text="Are you sure you want to delete this product?" />
+            <Overlay toggle={deleteConfirm} setToggle={setDeleteConfirm} product={product} btnFunction={() => navigate(`/home`)} btnText1="Go Home" text="Product deleted successfully!" />
+            <Overlay toggle={editConfirm} setToggle={setEditConfirm} product={product} btnFunction={() => navigate(`/home`)} btnText1="Go Home" text="Product updated successfully!" />
         </div>
     )
 }

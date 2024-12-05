@@ -1,5 +1,5 @@
 import { useContext, createContext } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GET } from "./utils/POST.js";
 
 const GlobalContext = createContext();
@@ -18,7 +18,13 @@ export const GlobalContextProvider = ({ children }) => {
         }
     }
 
+    useEffect(() => {
+        getProducts()
+    }, [])
+
+
     const [image, setImage] = useState('')
+    const [showResults, setShowResults] = useState(false)
 
     const handleChangeFile = (evento) => {
         const file_found = evento.target.files[0]
@@ -33,17 +39,31 @@ export const GlobalContextProvider = ({ children }) => {
         if (file_found) {
             lector_archivos.readAsDataURL(file_found)
         }
-    } 
+    }
+
+    const [cart, setCart] = useState([])
+    const [count, setCount] = useState(0)
 
 
 
+    useEffect(() => {
+        const cart = JSON.parse(sessionStorage.getItem('cart'))
+        if (cart) {
+            setCart(cart)
+        }
+    }, [])
 
     return (
         <GlobalContext.Provider value={{
             products,
             getProducts,
             image,
-            handleChangeFile
+            handleChangeFile,
+            showResults,
+            setShowResults,
+            cart,
+            count,
+            setCount,
         }}>
             {children}
         </GlobalContext.Provider>

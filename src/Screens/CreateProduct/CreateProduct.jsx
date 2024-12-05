@@ -5,9 +5,13 @@ import { useState } from 'react'
 import ProductForm from '../../Components/ProductForm/ProductForm.jsx'
 import './CreateProduct.css'
 import Navbar from '../../Components/Navbar/Navbar.jsx'
+import Overlay from '../../Components/Overlay/Overlay.jsx'
+import { useNavigate } from 'react-router-dom'
 
 const CreateProduct = () => {
   const [image, setImage] = useState('')
+  const [confirmCreate, setConfirmCreate] = useState(false)
+  const navigate = useNavigate()
   const handleSubmitCreateProductForm = async (e) => {
     try {
       e.preventDefault()
@@ -24,6 +28,7 @@ const CreateProduct = () => {
       formValuesObject.image = image
       const response = await POST('http://localhost:2000/api/products/', formValuesObject)
       if (response.ok) {
+        setConfirmCreate(true)
         // ACTIVATE SOMETHING THAT SAYS "PRODUCT CREATED SUCCESSFULLY"
       }
     } catch (error) {
@@ -53,6 +58,7 @@ const CreateProduct = () => {
       <h1 className='create-product-title'>Create your product</h1>
       <ProductForm image={image} handleSubmitCreateProductForm={handleSubmitCreateProductForm} handleChangeFile={handleChangeFile} />
     </div>
+    <Overlay toggle={confirmCreate} setToggle={setConfirmCreate} product={{}} btnFunction={() => navigate(`/home`)} btnText1="Go Home" text="Product created successfully!" />
     </>
   )
 }

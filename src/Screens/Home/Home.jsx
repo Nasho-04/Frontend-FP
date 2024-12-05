@@ -7,12 +7,12 @@ import { useGlobalContext } from '../../GlobalContext.jsx'
 import Cart from '../../Components/Cart/Cart.jsx'
 
 const Home = () => {
-
-  const { products, getProducts } = useGlobalContext()
+  const {products, getProducts } = useGlobalContext()
 
   useEffect(() => {
     getProducts()
-  }, [])
+  }, [products])
+
 
   return (
     <div className='home-container'>

@@ -5,12 +5,12 @@ import Footer from '../Footer/Footer.jsx'
 import { useGlobalContext } from '../../GlobalContext.jsx'
 
 const Main = () => {
-    const { products } = useGlobalContext()
+    const { products, setShowResults } = useGlobalContext()
     const products_list = products.filter((product) => product.active === true)
 
     return (
         <>
-            <main className='main'>
+            <main className='main'  onClick={() => setShowResults(false)}>
                 <h1 className='main-title'>Our products</h1>
                 <ul className='product-list'>
                     {products

@@ -1,0 +1,70 @@
+
+.delete-product-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.delete-product-modal {
+    position: absolute;
+    width: 600px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #e5e5e5;
+    border: 2px solid #111;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+    font-size: 23px;
+    z-index: 20;
+    text-align: center;
+    padding: 20px;
+    gap: 60px;
+}
+
+.delete-product-buttons {
+    display: flex;
+    gap: 40px;
+}
+
+.delete-product-button {
+    padding: 10px 20px;
+    background-color: #555;
+    color: #fefefe;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.delete-product-button:hover {
+    background-color: #333;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.delete-product-buttons .cancel {
+    background-color: #eee;
+    color: #333;
+    border: 1px solid #111;
+}
+
+.delete-product-buttons .cancel:hover {
+    background-color: #ccc;
+}
