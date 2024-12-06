@@ -84,8 +84,9 @@ const ProductDetail = () => {
     }
 
     return (
+        <>
+        <Navbar />
         <div className='product-detail-screen'>
-            <Navbar />
             <div className='product-detail-container'>
                 <div className='product-detail-image-container'>
                     <img src={product.image} alt={product.name} />
@@ -96,13 +97,13 @@ const ProductDetail = () => {
                     <p className='product-detail-stock'>Available stock: {product.stock}</p>
                     <p className='product-detail-description'>{product.description}</p>
                     <div className='product-detail-button-container'>
-                        {!authorized && <button className='product-detail-button' onClick={() => setToggleAdd(true)}>Add to Cart</button>}
+                        {authorized && <button className='product-detail-button' onClick={() => setToggleAdd(true)}>Add to Cart</button>}
                         {authorized && <button className='product-detail-button edit-button' onClick={() => setEditMode(!editMode)}>Edit Product</button>}
                         {authorized && <button className='product-detail-button delete-button' onClick={() => setToggleDelete(true)}>Delete Product</button>}
                     </div>
                 </div>
             </div>
-
+            {/* FORM */}
             <div className='product-detail-form-container' style={{ display: editMode ? 'flex' : 'none' }}>
                 <h2 className='product-detail-form-title'>Update Your Product</h2>
                 <form onSubmit={handleSubmitEditProductForm} action="" className='edit-product-form'>
@@ -159,6 +160,7 @@ const ProductDetail = () => {
             <Overlay toggle={deleteConfirm} setToggle={setDeleteConfirm} product={product} btnFunction={() => navigate(`/home`)} btnText1="Go Home" text="Product deleted successfully!" />
             <Overlay toggle={editConfirm} setToggle={setEditConfirm} product={product} btnFunction={() => navigate(`/home`)} btnText1="Go Home" text="Product updated successfully!" />
         </div>
+        </>
     )
 }
 

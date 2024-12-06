@@ -12,28 +12,30 @@ const SearchProduct = () => {
     const filteredProducts = products.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()))
 
     return (
-        <div className='search-product-screen'>
+        <>
             <Navbar />
-            <div className='search-product-container' onClick={() => setShowResults(false)}>
-                {filteredProducts.length > 0 
-                ?
-                filteredProducts.map((product) => <Link className='search-product-item-link' to={`/product/${product._id}`} key={product._id}>
-                        <div className='search-product-item-image' onClick={() => setShowResults(false)}>
-                            <img src={product.image} alt={product.name} />
+            <div className='search-product-screen'>
+                <div className='search-product-container' onClick={() => setShowResults(false)}>
+                    {filteredProducts.length > 0
+                        ?
+                        filteredProducts.map((product) => <Link className='search-product-item-link' to={`/product/${product._id}`} key={product._id}>
+                            <div className='search-product-item-image' onClick={() => setShowResults(false)}>
+                                <img src={product.image} alt={product.name} />
+                            </div>
+                            <div className='search-product-item-info'>
+                                <h2 className='search-product-item-name'>{product.name}</h2>
+                                <span className='search-product-item-price'>${product.price}</span>
+                            </div>
+                        </Link>)
+                        : <div className='no-products-found'>
+                            <h2>No products found</h2>
+                            <p>Try searching for something else</p>
                         </div>
-                        <div className='search-product-item-info'>
-                            <h2 className='search-product-item-name'>{product.name}</h2>
-                            <span className='search-product-item-price'>${product.price}</span>
-                        </div>
-                    </Link>)
-            : <div className='no-products-found'>
-                <h2>No products found</h2>
-                <p>Try searching for something else</p>
+                    }
+                </div>
+                <Cart />
             </div>
-            }
-            </div>
-            <Cart />
-        </div>
+        </>
     )
 }
 

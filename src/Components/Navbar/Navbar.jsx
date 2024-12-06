@@ -22,7 +22,7 @@ const Navbar = () => {
 
     return (
         <nav className='navbar'>
-            <div className='navbar-search'>
+            <form onSubmit={searchProduct} className='navbar-search'>
                 <input placeholder='Search products...' className='navbar-search-input' type="text" value={search} onChange={handleSearch} onFocus={() => setShowResults(true)} />
                 <button onClick={searchProduct} className='navbar-search-button'><i className="bi bi-search"></i></button>
                 {search && showResults
@@ -30,7 +30,7 @@ const Navbar = () => {
                         {filteredProducts.map((product) => <Link className='navbar-search-results-item-link' to={`/product/${product._id}`} key={product._id}><li className='navbar-search-results-item'>{product.name}</li></Link>)}
                     </ul>
                     : null}
-            </div>
+            </form>
             <div className='navbar-no-responsive-container'>
                 <NavList className='navbar-no-responsive-list' />
             </div>
