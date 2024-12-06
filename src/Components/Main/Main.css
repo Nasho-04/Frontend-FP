@@ -74,3 +74,30 @@ main {
     font-size: 1rem;
     font-weight: bold;
 }
+
+@media screen and (max-width: 768px) {
+    .product-item {
+        width: 150px;
+        height: 180px;
+    }
+
+    .product-item img {
+        max-height: 130px;
+    }
+
+    .product-item-info {
+        width: 150px;
+    }
+
+    .product-item-info h2 {
+        font-size: .7rem;
+    }
+
+    .product-item-info span {
+        font-size: .9rem;
+    }
+
+    .main-title {
+        font-size: 1.7rem;
+    }
+}

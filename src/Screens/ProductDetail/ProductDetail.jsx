@@ -96,7 +96,7 @@ const ProductDetail = () => {
                     <p className='product-detail-stock'>Available stock: {product.stock}</p>
                     <p className='product-detail-description'>{product.description}</p>
                     <div className='product-detail-button-container'>
-                        {authorized && <button className='product-detail-button' onClick={() => setToggleAdd(true)}>Add to Cart</button>}
+                        {!authorized && <button className='product-detail-button' onClick={() => setToggleAdd(true)}>Add to Cart</button>}
                         {authorized && <button className='product-detail-button edit-button' onClick={() => setEditMode(!editMode)}>Edit Product</button>}
                         {authorized && <button className='product-detail-button delete-button' onClick={() => setToggleDelete(true)}>Delete Product</button>}
                     </div>

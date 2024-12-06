@@ -1,5 +1,5 @@
 
-.delete-product-overlay {
+.product-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,7 +12,7 @@
     z-index: 10;
 }
 
-.delete-product-modal {
+.product-modal {
     position: absolute;
     width: 600px;
     height: 300px;
@@ -34,12 +34,12 @@
     gap: 60px;
 }
 
-.delete-product-buttons {
+.product-buttons {
     display: flex;
     gap: 40px;
 }
 
-.delete-product-button {
+.product-button {
     padding: 10px 20px;
     background-color: #555;
     color: #fefefe;
@@ -54,16 +54,38 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.delete-product-button:hover {
+.product-button:hover {
     background-color: #333;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
 
-.delete-product-buttons .cancel {
+.product-buttons .cancel {
     background-color: #eee;
     color: #333;
 }
 
-.delete-product-buttons .cancel:hover {
+.product-buttons .cancel:hover {
     background-color: #ccc;
+}
+
+@media only screen and (max-width: 768px) {
+    .product-modal {
+        width: 450px;
+        height: 250px;
+        font-size: 19px;
+        gap: 40px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .product-modal {
+        width: 300px;
+        font-size: 15px;
+        gap: 30px;
+    }
+
+    .product-button {
+        padding: 8px 15px;
+        font-size: 17px;
+    }
 }

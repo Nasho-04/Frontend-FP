@@ -1,6 +1,7 @@
 import { useContext, createContext } from "react";
 import { useState, useEffect } from "react";
 import { GET } from "./utils/POST.js";
+import { use } from "react";
 
 const GlobalContext = createContext();
 
