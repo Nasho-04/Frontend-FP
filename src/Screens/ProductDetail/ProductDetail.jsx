@@ -49,11 +49,10 @@ const ProductDetail = () => {
             formValuesObject.image = image
             const response = await PUT(`http://localhost:2000/api/products/edit/${product_id}`, formValuesObject)
             setImage('')
-            setEditConfirm(true)
-            setEditMode(false)
-            console.log(response)
             if (response.ok) {
-                console.log(response.message)
+                setEditConfirm(true)
+                setEditMode(false)
+                console.log(response)
             }
         } catch (error) {
             console.log(error)

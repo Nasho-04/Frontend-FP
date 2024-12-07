@@ -67,6 +67,7 @@ export const GlobalContextProvider = ({ children }) => {
             products,
             getProducts,
             image,
+            setImage,
             handleChangeFile,
             showResults,
             setShowResults,
