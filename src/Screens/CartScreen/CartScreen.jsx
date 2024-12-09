@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './CartScreen.css'
 import Navbar from '../../Components/Navbar/Navbar.jsx'
-import { Link } from 'react-router-dom'
 import CartProduct from '../../Components/CartProduct/CartProduct.jsx'
 
 const CartScreen = () => {

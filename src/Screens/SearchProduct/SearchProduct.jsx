@@ -8,7 +8,8 @@ import Cart from '../../Components/Cart/Cart.jsx'
 
 const SearchProduct = () => {
     const { search } = useParams()
-    const { products, showResults, setShowResults } = useGlobalContext()
+    const { showResults, setShowResults } = useGlobalContext()
+    const products = JSON.parse(sessionStorage.getItem('products'))
     const filteredProducts = products.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()))
 
     return (

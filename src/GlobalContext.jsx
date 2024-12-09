@@ -1,30 +1,10 @@
 import { useContext, createContext } from "react";
 import { useState, useEffect } from "react";
-import { GET } from "./utils/POST.js";
-import { use } from "react";
 
 const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
-    const [products, setProducts] = useState([])
     const [condicionMenu, setCondicionMenu] = useState(false)
-    const getProducts = async () => {
-        try {
-            const response = await GET('https://backend-fp.vercel.app/api/products/')
-            if (response.ok) {
-                const products_list = response.payload.details
-                setProducts(products_list)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    useEffect(() => {
-        getProducts()
-    }, [])
-
-
     const [image, setImage] = useState('')
     const [showResults, setShowResults] = useState(false)
 
@@ -64,8 +44,6 @@ export const GlobalContextProvider = ({ children }) => {
 
     return (
         <GlobalContext.Provider value={{
-            products,
-            getProducts,
             image,
             setImage,
             handleChangeFile,

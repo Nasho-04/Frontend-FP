@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom'
 
 const ProductDetail = () => {
     const { product_id } = useParams()
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = useState("")
     const { image, handleChangeFile, setImage } = useGlobalContext()
     const user_info = JSON.parse(sessionStorage.getItem('user_info'))
     const authorized = product.seller_id === user_info.id  || user_info.role === 'admin'
@@ -92,6 +92,8 @@ const ProductDetail = () => {
         <Navbar />
         <div className='product-detail-screen'>
             <div className='product-detail-container'>
+                {product 
+                ?<>
                 <div className='product-detail-image-container'>
                     <img src={product.image} alt={product.name} />
                 </div>
@@ -106,6 +108,12 @@ const ProductDetail = () => {
                         {authorized && <button className='product-detail-button delete-button' onClick={() => setToggleDelete(true)}>Delete Product</button>}
                     </div>
                 </div>
+                </>
+                : 
+                    <div className='loading-container'>
+                        <span className='loading-spinner'></span>
+                    </div>
+                }
             </div>
             {/* FORM */}
             <div className='product-detail-form-container' style={{ display: editMode ? 'flex' : 'none' }}>

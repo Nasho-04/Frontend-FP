@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Navbar.css'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -6,9 +6,11 @@ import { useGlobalContext } from '../../GlobalContext.jsx'
 import NavList from '../NavList/NavList.jsx'
 
 const Navbar = () => {
-    const { products, showResults, setShowResults, condicionMenu, setCondicionMenu } = useGlobalContext()
+    const { showResults, setShowResults, condicionMenu, setCondicionMenu } = useGlobalContext()
     const [search, setSearch] = useState('')
+    const [filteredProducts, setFilteredProducts] = useState([])
     const navigate = useNavigate()
+    const products = JSON.parse(sessionStorage.getItem('products'))
 
     const searchProduct = () => {
         if (search) {
@@ -18,7 +20,15 @@ const Navbar = () => {
     const handleSearch = (e) => {
         setSearch(e.target.value)
     }
-    const filteredProducts = products.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()))
+
+    useEffect(() => {
+        if (search) {
+            const filtered = products.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()))
+            setFilteredProducts(filtered)
+        } else {
+            setFilteredProducts([])
+        }
+    }, [search])
 
     return (
         <nav className='navbar'>
