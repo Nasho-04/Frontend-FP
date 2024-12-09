@@ -16,7 +16,7 @@ const Login = () => {
                 'password': ''
             }
             const form_values_object = extractFormData(form_fields, form_Values)
-            const response = await POST('http://localhost:2000/api/auth/login', form_values_object)
+            const response = await POST('https://backend-fp.vercel.app/api/auth/login', form_values_object)
             if (response.ok) {
                 const access_token = response.payload.token
                 sessionStorage.setItem('access_token', access_token)

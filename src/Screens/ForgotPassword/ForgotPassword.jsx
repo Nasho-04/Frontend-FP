@@ -14,7 +14,7 @@ const ForgotPassword = () => {
         'email': ''
       }
       const formValuesObject = await extractFormData(formFields, formValues)
-      const response = await POST('http://localhost:2000/api/auth/forgot-password', formValuesObject)
+      const response = await POST('https://backend-fp.vercel.app/api/auth/forgot-password', formValuesObject)
       if (response.ok) {
         // ACTIVATE SOMETHING THAT SAYS "EMAIL SENT SUCCESSFULLY"
       }

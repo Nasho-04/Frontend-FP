@@ -19,7 +19,7 @@ const ResetPassword = () => {
         'password': ''
       }
       const formValuesObject = await extractFormData(formFields, formValues)
-      const response = await PUT('http://localhost:2000/api/auth/reset-password/' + reset_token, formValuesObject)
+      const response = await PUT('https://backend-fp.vercel.app/api/auth/reset-password/' + reset_token, formValuesObject)
       if (response.ok) {
         console.log(response)
         setTogglescreen(true)

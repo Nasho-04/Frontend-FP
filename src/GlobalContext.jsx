@@ -10,7 +10,7 @@ export const GlobalContextProvider = ({ children }) => {
     const [condicionMenu, setCondicionMenu] = useState(false)
     const getProducts = async () => {
         try {
-            const response = await GET('http://localhost:2000/api/products/')
+            const response = await GET('https://backend-fp.vercel.app/api/products/')
             if (response.ok) {
                 const products_list = response.payload.details
                 setProducts(products_list)

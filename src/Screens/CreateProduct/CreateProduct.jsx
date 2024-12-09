@@ -26,7 +26,7 @@ const CreateProduct = () => {
       }
       const formValuesObject = await extractFormData(formFields, formValues)
       formValuesObject.image = image
-      const response = await POST('http://localhost:2000/api/products/', formValuesObject)
+      const response = await POST('https://backend-fp.vercel.app/api/products/', formValuesObject)
       if (response.ok) {
         setConfirmCreate(true)
         // ACTIVATE SOMETHING THAT SAYS "PRODUCT CREATED SUCCESSFULLY"

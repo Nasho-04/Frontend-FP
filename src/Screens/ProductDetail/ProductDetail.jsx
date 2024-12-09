@@ -26,7 +26,7 @@ const ProductDetail = () => {
 
     useEffect(() => {
         const getProduct = async () => {
-            const response = await GET(`http://localhost:2000/api/products/${product_id}`)
+            const response = await GET(`https://backend-fp.vercel.app/api/products/${product_id}`)
             const data = response.payload.details
             setProduct(data)
         }
@@ -47,7 +47,7 @@ const ProductDetail = () => {
             }
             const formValuesObject = extractFormData(formFields, formValues)
             formValuesObject.image = image
-            const response = await PUT(`http://localhost:2000/api/products/edit/${product_id}`, formValuesObject)
+            const response = await PUT(`https://backend-fp.vercel.app/api/products/edit/${product_id}`, formValuesObject)
             setImage('')
             if (response.ok) {
                 setEditConfirm(true)
@@ -60,7 +60,7 @@ const ProductDetail = () => {
     }
 
     const handleDeleteProduct = async (product_id) => {
-        const response = await DELETE(`http://localhost:2000/api/products/${product_id}`)
+        const response = await DELETE(`https://backend-fp.vercel.app/api/products/${product_id}`)
         if (response.ok) {
             setToggleDelete(false)
             setDeleteConfirm(true)
