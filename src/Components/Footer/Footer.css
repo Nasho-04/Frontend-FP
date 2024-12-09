@@ -5,3 +5,63 @@ footer {
     text-align: center;
     height: 10dvh;
 }
+
+.footer-contacts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    height: 100%;
+    width: 100%;
+    font-size: 18px;
+}
+
+.footer-contacts li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.footer-contacts li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fefefe;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.footer-contacts li a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (min-width: 1700px) {
+    .footer-contacts {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .footer-contacts {
+        justify-content: start;
+        padding: 10px;
+        gap: 15px;
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 465px) {
+    .footer-contacts {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .footer-contacts {
+        font-size: 10px;
+        gap: 5px;
+    }
+}

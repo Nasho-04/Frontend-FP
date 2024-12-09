@@ -8,14 +8,21 @@ const NavList = () => {
 
 
     return (
-        <div className='navbar-list-container' onClick={() => setShowResults(false)}>
-            <ul className='navbar-list'>
-                <li><Link onClick={() => setCondicionMenu(false)} to='/home'>Home</Link></li>
-                <li><a onClick={() => setCondicionMenu(false)} href="#footer">Contact</a></li>
-                <li><Link onClick={() => setCondicionMenu(false)} to='/product/new'>Add Product</Link></li>
-                <li><Link to='/' onClick={logout}>Logout</Link></li>
-            </ul>
-        </div>
+        <>
+            <span className='navbar-menu responsive' onClick={() => setCondicionMenu(!condicionMenu)}>
+                {condicionMenu
+                    ? <i className="bi bi-x-lg"></i>
+                    : <i className="bi bi-list"></i>}
+            </span>
+            <div className='navbar-list-container' onClick={() => setShowResults(false)}>
+                <ul className='navbar-list'>
+                    <li><Link onClick={() => setCondicionMenu(false)} to='/home'>Home</Link></li>
+                    <li><a onClick={() => setCondicionMenu(false)} href="#footer">Contact</a></li>
+                    <li><Link onClick={() => setCondicionMenu(false)} to='/product/new'>Add Product</Link></li>
+                    <li><Link to='/' onClick={logout}>Logout</Link></li>
+                </ul>
+            </div>
+        </>
     )
 }
 

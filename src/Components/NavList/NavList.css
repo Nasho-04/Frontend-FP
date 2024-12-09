@@ -20,6 +20,24 @@
     text-decoration: underline;
 }
 
+.responsive {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+}
+
+@media screen and (min-width: 1900px) {
+    .navbar-list {
+        font-size: 26px;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .navbar-list {
+        font-size: 22px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .navbar-list {
         flex-direction: column;

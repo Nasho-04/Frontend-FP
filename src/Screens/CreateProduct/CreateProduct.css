@@ -28,6 +28,12 @@
     font-weight: bold;
 }
 
+@media screen and (min-width: 1800px) {
+    .create-product-title {
+        font-size: 50px;
+    }
+}
+
 @media screen and (max-width: 500px) {
     .create-product-title {
         font-size: 25px;

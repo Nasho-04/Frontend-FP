@@ -1,6 +1,5 @@
 import React from 'react'
 import './ProductForm.css'
-import { useGlobalContext } from '../../GlobalContext.jsx'
 
 const ProductForm = ({ handleSubmitCreateProductForm, handleChangeFile, image }) => {
 

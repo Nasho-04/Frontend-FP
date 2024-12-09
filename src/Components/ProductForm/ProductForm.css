@@ -190,6 +190,65 @@
     color: rgb(6, 227, 24);
 }
 
+@media screen and (min-width: 1700px) {
+    .create-product-form {
+        width: 1000px;
+        height: 460px;
+    }
+
+    .create-product-button {
+        font-size: 20px;
+    }
+
+    .create-product-field label {
+        font-size: 18px;
+    }
+
+    .create-product-input {
+        font-size: 20px;
+        height: 40px;
+    }
+
+    .create-product-textarea {
+        font-size: 18px;
+    }
+
+    #category-create {
+        font-size: 18px;
+        height: 40px;
+    }
+
+    .create-product-image::-webkit-file-upload-button {
+        font-size: 18px;
+    }
+
+    .image span {
+        font-size: 25px;
+    }
+
+    .image input {
+        width: 180px
+    }
+
+    .create-product-title {
+        font-size: 40px;
+    }
+
+    .create-product-error {
+        font-size: 25px;
+    }
+
+    .button-container {
+        gap: 20px;
+    }
+
+    .create-product-button {
+        padding: 20px 20px;
+        gap: 20px;
+        font-size: 23px;
+    }
+}
+
 @media screen and (max-width: 700px) {
     .create-product-form {
         width: 500px;

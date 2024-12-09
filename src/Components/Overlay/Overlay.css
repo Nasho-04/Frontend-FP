@@ -68,6 +68,36 @@
     background-color: #ccc;
 }
 
+@media only screen and (min-width: 1700px) {
+    .product-modal {
+        width: 800px;
+        height: 400px;
+        font-size: 30px;
+        gap: 80px;
+    }
+
+    .product-button {
+        padding: 15px 30px;
+        font-size: 25px;
+    }
+
+    .product-buttons {
+        gap: 80px;
+    }
+
+    .product-buttons .cancel {
+        font-size: 27px;
+    }
+
+    .product-buttons .confirm {
+        font-size: 27px;
+    }
+
+    .product-modal h3 {
+        font-size: 40px;
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .product-modal {
         width: 450px;
