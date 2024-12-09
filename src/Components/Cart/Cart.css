@@ -15,7 +15,8 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    border: 1px solid #fefefe
+    border: 1px solid #fefefe;
+    z-index: 15;
 }
 
 .cart:hover {
