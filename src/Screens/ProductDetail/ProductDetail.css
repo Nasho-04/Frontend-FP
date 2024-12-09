@@ -99,6 +99,12 @@
 /* Edit Product */
 
 
+.edit-product-error {
+    color: rgb(141, 6, 6);
+    font-size: 15px;
+    text-align: left;
+}
+
 
 .product-detail-form-title {
     text-align: center;

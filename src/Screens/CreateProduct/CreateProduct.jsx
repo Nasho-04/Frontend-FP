@@ -29,7 +29,11 @@ const CreateProduct = () => {
       const response = await POST('https://backend-fp.vercel.app/api/products/', formValuesObject)
       if (response.ok) {
         setConfirmCreate(true)
-        // ACTIVATE SOMETHING THAT SAYS "PRODUCT CREATED SUCCESSFULLY"
+      }
+      else {
+        const error_message = response.message
+        const error_span = document.querySelector('.create-product-error')
+        error_span.textContent = error_message
       }
     } catch (error) {
       console.log(error)
@@ -56,6 +60,7 @@ const CreateProduct = () => {
     <Navbar />
     <div className='create-product-container'>
       <h1 className='create-product-title'>Create your product</h1>
+      <span className='create-product-error'></span>
       <ProductForm image={image} handleSubmitCreateProductForm={handleSubmitCreateProductForm} handleChangeFile={handleChangeFile} />
     </div>
     <Overlay toggle={confirmCreate} setToggle={setConfirmCreate} product={{}} btnFunction={() => navigate(`/home`)} btnText1="Go Home" text="Product created successfully!" />

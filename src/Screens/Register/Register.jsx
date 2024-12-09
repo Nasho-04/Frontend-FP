@@ -26,7 +26,6 @@ const Register = () => {
         const error_message = response.message
         const error_span = document.querySelector('.register-error')
         error_span.textContent = error_message
-        console.log(error_message)
       }
     }
     catch (error) {

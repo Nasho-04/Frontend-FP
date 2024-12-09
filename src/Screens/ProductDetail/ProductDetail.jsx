@@ -54,6 +54,11 @@ const ProductDetail = () => {
                 setEditMode(false)
                 console.log(response)
             }
+            else {
+                const error_message = response.message
+                const error_span = document.querySelector('.edit-product-error')
+                error_span.textContent = error_message
+            }
         } catch (error) {
             console.log(error)
         }
@@ -105,6 +110,7 @@ const ProductDetail = () => {
             {/* FORM */}
             <div className='product-detail-form-container' style={{ display: editMode ? 'flex' : 'none' }}>
                 <h2 className='product-detail-form-title'>Update Your Product</h2>
+                <span className='edit-product-error'></span>
                 <form onSubmit={handleSubmitEditProductForm} action="" className='edit-product-form'>
                     <div className='edit-product-left'>
                         <div className='edit-product-field'>

@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { extractFormData } from '../../utils/ExtractData.js'
 import { POST } from '../../utils/POST.js'
 import './ForgotPassword.css'
+import Overlay from '../../Components/Overlay/Overlay.jsx'
+import { useNavigate } from 'react-router-dom'
 
 const ForgotPassword = () => {
+  const navigate = useNavigate()
+  const [toggle, setToggle] = useState(false)
 
   const handleSubmitForgotPasswordForm = async (e) => {
     try {
@@ -22,7 +26,6 @@ const ForgotPassword = () => {
         const error_message = response.message
         const error_span = document.querySelector('.forgot-password-error')
         error_span.textContent = error_message
-        console.log(response)
       }
     } catch (error) {
 
@@ -42,12 +45,13 @@ const ForgotPassword = () => {
             <input className='forgot-password-input' type="email" id="email" name="email" required />
             <span className='forgot-password-error'></span>
           </div>
-          <button className='forgot-password-button' type="submit">Send</button>
+          <button className='forgot-password-button' type="submit" onClick={() => setToggle(true)}>Send</button>
         </form>
         <div className='forgot-password-link-container'>
           <span>Back to <a className='forgot-password-link' href="/login">Login</a></span>
         </div>
       </div>
+      <Overlay product={{}} text={'Email sent successfully!'} btnFunction={() => navigate('/login')} btnText1={'Go to login'} toggle={toggle} setToggle={setToggle} />
     </div>
   )
 }

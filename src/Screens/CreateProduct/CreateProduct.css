@@ -20,6 +20,13 @@
     font-weight: bold;
 }
 
+.create-product-error {
+    color: rgb(185, 5, 5);
+    font-size: 20px;
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
 
 @media screen and (max-width: 500px) {
     .create-product-title {
