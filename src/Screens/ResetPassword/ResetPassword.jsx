@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import './ResetPassword.css'
 import LoadingOverlay from '../../Components/LoadingOverlay/LoadingOverlay.jsx'
-import useGlobalContext from '../../GlobalContext.jsx'
+import { useGlobalContext } from '../../GlobalContext.jsx'
 
 const ResetPassword = () => {
   const { loading, setLoading } = useGlobalContext()
