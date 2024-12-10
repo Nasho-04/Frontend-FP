@@ -1,6 +1,6 @@
 import React from 'react'
 import './Footer.css'
-import { useGlobalContext } from '../../GlobalContext'
+import { useGlobalContext } from '../../GlobalContext.jsx'
 
 const Footer = () => {
 const {setShowResults} = useGlobalContext()
