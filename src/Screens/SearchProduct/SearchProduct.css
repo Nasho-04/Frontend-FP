@@ -86,6 +86,35 @@
     width: 80%;
 }
 
+@media screen and (min-width: 1700px) {
+    .search-product-item-link {
+        min-width: 800px;
+        width: 60%
+    }
+
+    .search-product-item-image {
+        width: 130px;
+        height: 130px;
+    }
+
+    .search-product-item-image img {
+        width: 130px;
+        height: 130px;
+    }
+
+    .search-product-item-info {
+        height: 130px;
+    }
+
+    .search-product-item-name {
+        font-size: 30px;
+    }
+
+    .search-product-item-price {    
+        font-size: 25px;
+    }
+}
+
 @media screen and (max-width: 650px) {
     .search-product-item-link {
         min-width: 300px;

@@ -3,12 +3,16 @@ import { useNavigate } from 'react-router-dom'
 import './Login.css'
 import { POST } from '../../utils/POST.js'
 import { extractFormData } from '../../utils/ExtractData.js'
+import { useGlobalContext } from '../../GlobalContext.jsx'
+import LoadingOverlay from '../../Components/LoadingOverlay/LoadingOverlay.jsx'
 
 const Login = () => {
     const navigate = useNavigate()
+    const { loading, setLoading } = useGlobalContext()
     const handleSubmitLoginForm = async (e) => {
         try {
             e.preventDefault()
+            setLoading(true)
             const form_HTML = e.target
             const form_Values = new FormData(form_HTML)
             const form_fields = {
@@ -18,6 +22,7 @@ const Login = () => {
             const form_values_object = extractFormData(form_fields, form_Values)
             const response = await POST('https://backend-fp.vercel.app/api/auth/login', form_values_object)
             if (response.ok) {
+                setLoading(false)
                 const access_token = response.payload.token
                 sessionStorage.setItem('access_token', access_token)
                 sessionStorage.setItem('user_info', JSON.stringify(response.payload.user))
@@ -25,6 +30,7 @@ const Login = () => {
                 navigate('/home')
             }
             else {
+                setLoading(false)
                 const error_message = response.message
                 const error_span = document.querySelector('.login-error')
                 error_span.textContent = error_message
@@ -57,6 +63,7 @@ const Login = () => {
                     <span className='login-span'>If you forgot your password, <a className='login-link' href="/forgot-password">Forgot Password</a></span>
                 </div>
             </div>
+            <LoadingOverlay />
         </div>
     )
 }

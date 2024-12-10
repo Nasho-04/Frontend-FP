@@ -4,14 +4,18 @@ import { POST } from '../../utils/POST.js'
 import './ForgotPassword.css'
 import Overlay from '../../Components/Overlay/Overlay.jsx'
 import { useNavigate } from 'react-router-dom'
+import LoadingOverlay from '../../Components/LoadingOverlay/LoadingOverlay.jsx'
+import { useGlobalContext } from '../../GlobalContext.jsx'
 
 const ForgotPassword = () => {
   const navigate = useNavigate()
+  const { loading, setLoading } = useGlobalContext()
   const [toggle, setToggle] = useState(false)
 
   const handleSubmitForgotPasswordForm = async (e) => {
     try {
       e.preventDefault()
+      setLoading(true)
       const formHTML = e.target
       const formValues = new FormData(formHTML)
       const formFields = {
@@ -20,9 +24,10 @@ const ForgotPassword = () => {
       const formValuesObject = await extractFormData(formFields, formValues)
       const response = await POST('https://backend-fp.vercel.app/api/auth/forgot-password', formValuesObject)
       if (response.ok) {
-        // ACTIVATE SOMETHING THAT SAYS "EMAIL SENT SUCCESSFULLY"
+        setLoading(false)
       }
       else {
+        setLoading(false)
         const error_message = response.message
         const error_span = document.querySelector('.forgot-password-error')
         error_span.textContent = error_message
@@ -52,6 +57,7 @@ const ForgotPassword = () => {
         </div>
       </div>
       <Overlay product={{}} text={'Email sent successfully!'} btnFunction={() => navigate('/login')} btnText1={'Go to login'} toggle={toggle} setToggle={setToggle} />
+      <LoadingOverlay/>
     </div>
   )
 }

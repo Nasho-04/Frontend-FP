@@ -26,13 +26,13 @@
     right: 20px;
 }
 
-@media screen and (min-width: 1900px) {
+@media screen and (min-width: 1900px) and (max-width: 2200px) {
     .navbar-list {
         font-size: 26px;
     }
 }
 
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1600px) and (max-width: 1900px) {
     .navbar-list {
         font-size: 22px;
     }

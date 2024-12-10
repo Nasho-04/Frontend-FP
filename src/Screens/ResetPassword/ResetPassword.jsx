@@ -4,15 +4,18 @@ import { PUT } from '../../utils/POST.js'
 import { Link, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import './ResetPassword.css'
+import LoadingOverlay from '../../Components/LoadingOverlay/LoadingOverlay.jsx'
+import useGlobalContext from '../../GlobalContext.jsx'
 
 const ResetPassword = () => {
-
+  const { loading, setLoading } = useGlobalContext()
   const [ togglescreen, setTogglescreen ] = useState(false)
 
   const { reset_token } = useParams()
   const handleSubmitResetPasswordForm = async (e) => {
     try {
       e.preventDefault()
+      setLoading(true)
       const formHTML = e.target
       const formValues = new FormData(formHTML)
       const formFields = {
@@ -21,10 +24,11 @@ const ResetPassword = () => {
       const formValuesObject = await extractFormData(formFields, formValues)
       const response = await PUT('https://backend-fp.vercel.app/api/auth/reset-password/' + reset_token, formValuesObject)
       if (response.ok) {
-        console.log(response)
+        setLoading(false)
         setTogglescreen(true)
       }
       else {
+        setLoading(false)
         const error_message = response.message
         const error_span = document.querySelector('.reset-password-error')
         error_span.textContent = error_message
@@ -57,6 +61,7 @@ const ResetPassword = () => {
         <p>You can now log in with your new password.</p>
         <Link className='reset-password-link' to='/login'>Go to Login screen.</Link>
       </div>
+      <LoadingOverlay />
     </div>
 
   )

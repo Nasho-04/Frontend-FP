@@ -9,11 +9,12 @@ import { useGlobalContext } from '../../GlobalContext.jsx'
 import Cart from '../../Components/Cart/Cart.jsx'
 import Overlay from '../../Components/Overlay/Overlay.jsx'
 import { useNavigate } from 'react-router-dom'
+import LoadingOverlay from '../../Components/LoadingOverlay/LoadingOverlay.jsx'
 
 const ProductDetail = () => {
     const { product_id } = useParams()
     const [product, setProduct] = useState("")
-    const { image, handleChangeFile, setImage } = useGlobalContext()
+    const { image, handleChangeFile, setImage, loading, setLoading } = useGlobalContext()
     const user_info = JSON.parse(sessionStorage.getItem('user_info'))
     const authorized = product.seller_id === user_info.id  || user_info.role === 'admin'
     const [editMode, setEditMode] = useState(false)
@@ -36,6 +37,7 @@ const ProductDetail = () => {
     const handleSubmitEditProductForm = async (e) => {
         try {
             e.preventDefault()
+            setLoading(true)
             const formHTML = e.target
             const formValues = new FormData(formHTML)
             const formFields = {
@@ -50,11 +52,13 @@ const ProductDetail = () => {
             const response = await PUT(`https://backend-fp.vercel.app/api/products/edit/${product_id}`, formValuesObject)
             setImage('')
             if (response.ok) {
+                setLoading(false)
                 setEditConfirm(true)
                 setEditMode(false)
                 console.log(response)
             }
             else {
+                setLoading(false)
                 const error_message = response.message
                 const error_span = document.querySelector('.edit-product-error')
                 error_span.textContent = error_message
@@ -65,10 +69,15 @@ const ProductDetail = () => {
     }
 
     const handleDeleteProduct = async (product_id) => {
+        setLoading(true)
         const response = await DELETE(`https://backend-fp.vercel.app/api/products/${product_id}`)
         if (response.ok) {
+            setLoading(false)
             setToggleDelete(false)
             setDeleteConfirm(true)
+        }
+        else {
+            setLoading(false)
         }
     }
 
@@ -90,6 +99,7 @@ const ProductDetail = () => {
     return (
         <>
         <Navbar />
+        <LoadingOverlay />
         <div className='product-detail-screen'>
             <div className='product-detail-container'>
                 {product 

@@ -7,14 +7,18 @@ import './CreateProduct.css'
 import Navbar from '../../Components/Navbar/Navbar.jsx'
 import Overlay from '../../Components/Overlay/Overlay.jsx'
 import { useNavigate } from 'react-router-dom'
+import { useGlobalContext } from '../../GlobalContext.jsx'
+import LoadingOverlay from '../../Components/LoadingOverlay/LoadingOverlay.jsx'
 
 const CreateProduct = () => {
   const [image, setImage] = useState('')
   const [confirmCreate, setConfirmCreate] = useState(false)
+  const { loading, setLoading } = useGlobalContext()
   const navigate = useNavigate()
   const handleSubmitCreateProductForm = async (e) => {
     try {
       e.preventDefault()
+      setLoading(true)
       const formHTML = e.target
       const formValues = new FormData(formHTML)
       const formFields = {
@@ -28,9 +32,11 @@ const CreateProduct = () => {
       formValuesObject.image = image
       const response = await POST('https://backend-fp.vercel.app/api/products/', formValuesObject)
       if (response.ok) {
+        setLoading(false)
         setConfirmCreate(true)
       }
       else {
+        setLoading(false)
         const error_message = response.message
         const error_span = document.querySelector('.create-product-error')
         error_span.textContent = error_message
@@ -42,9 +48,10 @@ const CreateProduct = () => {
 
   const handleChangeFile = (evento) => {
     const file_found = evento.target.files[0]
-    const FILE_MB_LIMIT = 5
+    const FILE_MB_LIMIT = 2
     if (file_found && file_found.size > FILE_MB_LIMIT * 1024 * 1024) {
-      console.log('El archivo es demasiado grande')
+      const error_span = document.querySelector('.create-product-error')
+      error_span.textContent = 'Image size must be less than 2MB'
     }
     const lector_archivos = new FileReader()
     lector_archivos.onloadend = () => {
@@ -64,6 +71,7 @@ const CreateProduct = () => {
       <ProductForm image={image} handleSubmitCreateProductForm={handleSubmitCreateProductForm} handleChangeFile={handleChangeFile} />
     </div>
     <Overlay toggle={confirmCreate} setToggle={setConfirmCreate} product={{}} btnFunction={() => navigate(`/home`)} btnText1="Go Home" text="Product created successfully!" />
+    <LoadingOverlay />
     </>
   )
 }

@@ -7,6 +7,7 @@ export const GlobalContextProvider = ({ children }) => {
     const [condicionMenu, setCondicionMenu] = useState(false)
     const [image, setImage] = useState('')
     const [showResults, setShowResults] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const handleChangeFile = (evento) => {
         const file_found = evento.target.files[0]
@@ -54,7 +55,9 @@ export const GlobalContextProvider = ({ children }) => {
             setCount,
             condicionMenu,
             setCondicionMenu,
-            logout
+            logout,
+            loading,
+            setLoading
         }}>
             {children}
         </GlobalContext.Provider>
