@@ -11,16 +11,20 @@ export const GlobalContextProvider = ({ children }) => {
 
     const handleChangeFile = (evento) => {
         const file_found = evento.target.files[0]
-        const FILE_MB_LIMIT = 5
+        const FILE_MB_LIMIT = 2
         if (file_found && file_found.size > FILE_MB_LIMIT * 1024 * 1024) {
-            console.log('El archivo es demasiado grande')
+            const error_span = document.querySelector('.create-product-error')
+            error_span.textContent = 'Image size must be less than 2MB'
+            file_found.value = ''
         }
-        const lector_archivos = new FileReader()
-        lector_archivos.onloadend = () => {
-            setImage(lector_archivos.result)
-        }
-        if (file_found) {
-            lector_archivos.readAsDataURL(file_found)
+        else {
+            const lector_archivos = new FileReader()
+            lector_archivos.onloadend = () => {
+                setImage(lector_archivos.result)
+            }
+            if (file_found) {
+                lector_archivos.readAsDataURL(file_found)
+            }
         }
     }
 
@@ -35,7 +39,7 @@ export const GlobalContextProvider = ({ children }) => {
             setCart(cart)
         }
     }, [])
-    
+
     const logout = () => {
         setCondicionMenu(false)
         sessionStorage.removeItem('access_token')

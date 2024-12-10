@@ -12,11 +12,11 @@ const ProductForm = ({ handleSubmitCreateProductForm, handleChangeFile, image })
                 </div>
                 <div className='create-product-field'>
                     <label htmlFor="price">Price: </label>
-                    <input className='create-product-input' type="number" id="price" name="price" required />
+                    <input className='create-product-input' type="number" id="price" name="price" required min="0" />
                 </div>
                 <div className='create-product-field'>
                     <label htmlFor="category-create">Category: </label>
-                    <select name="category" id="category-create">
+                    <select name="category" id="category-create" required>
                         <option value="Electronics">Electronics</option>
                         <option value="Clothing">Clothing</option>
                         <option value="Home">Home</option>
@@ -34,7 +34,7 @@ const ProductForm = ({ handleSubmitCreateProductForm, handleChangeFile, image })
             <div className='create-product-right'>
                 <div className='create-product-field'>
                     <label htmlFor="stock">Stock: </label>
-                    <input className='create-product-input' type="number" id="stock" name="stock" required />
+                    <input className='create-product-input' type="number" id="stock" name="stock" required min="0" max="100" />
                 </div>
                 <div className='create-product-field image'>
                     <label htmlFor="image">Image: </label>

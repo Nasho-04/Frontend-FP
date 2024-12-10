@@ -71,7 +71,7 @@ const CreateProduct = () => {
     <div className='create-product-container'>
       <h1 className='create-product-title'>Create your product</h1>
       <span className='create-product-error'></span>
-      <ProductForm image={image} handleSubmitCreateProductForm={handleSubmitCreateProductForm} handleChangeFile={handleChangeFile} />
+      <ProductForm handleSubmitCreateProductForm={handleSubmitCreateProductForm} handleChangeFile={handleChangeFile} image={image} />
     </div>
     <Overlay toggle={confirmCreate} setToggle={setConfirmCreate} product={{}} btnFunction={() => navigate(`/home`)} btnText1="Go Home" text="Product created successfully!" />
     <LoadingOverlay />

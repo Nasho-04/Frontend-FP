@@ -55,7 +55,6 @@ const ProductDetail = () => {
                 setLoading(false)
                 setEditConfirm(true)
                 setEditMode(false)
-                console.log(response)
             }
             else {
                 setLoading(false)
@@ -137,11 +136,11 @@ const ProductDetail = () => {
                         </div>
                         <div className='edit-product-field'>
                             <label htmlFor="price">Price: </label>
-                            <input className='edit-product-input' type="number" id="price" name="price" />
+                            <input className='edit-product-input' type="number" id="price" name="price" required min="0" />
                         </div>
                         <div className='edit-product-field'>
                             <label htmlFor="category">Category: </label>
-                            <select name="category" id="category">
+                            <select name="category" id="category" required>
                                 <option value="Electronics">Electronics</option>
                                 <option value="Clothing">Clothing</option>
                                 <option value="Home">Home</option>
@@ -159,7 +158,7 @@ const ProductDetail = () => {
                     <div className='edit-product-right'>
                         <div className='edit-product-field'>
                             <label htmlFor="stock">Stock: </label>
-                            <input className='edit-product-input' type="number" id="stock" name="stock" required />
+                            <input className='edit-product-input' type="number" id="stock" name="stock" required min="0" max="100" />
                         </div>
                         <div className='edit-product-field edit-image'>
                             <label htmlFor="image">Image: </label>
