@@ -25,6 +25,7 @@ const ForgotPassword = () => {
       const response = await POST('https://backend-fp.vercel.app/api/auth/forgot-password', formValuesObject)
       if (response.ok) {
         setLoading(false)
+        setToggle(true) 
       }
       else {
         setLoading(false)
@@ -50,7 +51,7 @@ const ForgotPassword = () => {
             <input className='forgot-password-input' type="email" id="email" name="email" required />
             <span className='forgot-password-error'></span>
           </div>
-          <button className='forgot-password-button' type="submit" onClick={() => setToggle(true)}>Send</button>
+          <button className='forgot-password-button' type="submit">Send</button>
         </form>
         <div className='forgot-password-link-container'>
           <span>Back to <a className='forgot-password-link' href="/login">Login</a></span>
