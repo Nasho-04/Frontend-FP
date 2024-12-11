@@ -3,7 +3,7 @@
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: #888;
+    background-color: #fefefe;
     min-height: 100dvh;
     width: 100%;
     gap: 20px;
@@ -26,9 +26,8 @@
     color: #555;
     min-width: 550px;
     width: 60%;
-    background-color: #fefefe;
+    background-color: #f5f1f1;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     transition: all 0.3s ease-in-out;
     display: flex;
     flex-direction: row;

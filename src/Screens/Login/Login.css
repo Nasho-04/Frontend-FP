@@ -24,12 +24,12 @@
     text-align: center;
     margin-bottom: 20px;
     font-size: 30px;
-    font-weight: bold;
     color: #fefefe;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     border-bottom: 2px solid #ccc;
     padding-bottom: 5px;
     width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .login-form {

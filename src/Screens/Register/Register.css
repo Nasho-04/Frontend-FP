@@ -30,6 +30,7 @@
     border-bottom: 2px solid #ccc;
     padding-bottom: 10px;
     width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .register-form {
@@ -272,6 +273,7 @@
 
     .register-link-container {
         font-size: 12px;
+        margin-top: 10px;
     }
 
     .register-error {
