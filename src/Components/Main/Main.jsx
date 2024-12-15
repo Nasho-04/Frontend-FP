@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import './Main.css'
 import Footer from '../Footer/Footer.jsx'
 import { useGlobalContext } from '../../GlobalContext.jsx'
+import Section from '../Section/Section.jsx'
 
 const Main = ({ products }) => {
-    const { setShowResults } = useGlobalContext()
+    const { setShowResults, categories } = useGlobalContext()
     const [productsList, setProductsList] = useState([])
 
     useEffect(() => {
@@ -15,27 +16,15 @@ const Main = ({ products }) => {
     return (
         <>
             <main className='main' onClick={() => setShowResults(false)}>
-                <h1 className='main-title'>Our products</h1>
-                <ul className='product-list'>
-                    {products.length > 0
-                        ? productsList.map((product) => (
-                            product.active === true ?
-                                <li className='product-item' key={product._id}>
-                                    <Link className='product-item-link' to={`/product/${product._id}`}>
-                                        <img src={product.image} alt={product.name} />
-                                        <div className='product-item-info'>
-                                            <h2 maxLength="20">{product.name}</h2>
-                                            <span>${product.price}</span>
-                                        </div>
-                                    </Link>
-                                </li>
-                                : null
-                        ))
-                        : <div className='loading'>
-                            <span className="loader"></span>
-                        </div>
-                    }
-                </ul>
+                {productsList.length > 0
+                    ? categories.map((category) =>
+                        products.filter((product) => product.category === category).length > 0
+                            ? <Section key={category} category_array={products.filter((product) => product.category === category)} category_name={category} />
+                            : null)
+                    :
+                    < div className='loading' >
+                        <span className="loader"></span>
+                    </div >}
             </main>
             <Footer />
         </>

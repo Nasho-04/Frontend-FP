@@ -1,0 +1,136 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    padding: 10px 0;
+    gap: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.section-title {
+    text-align: center;
+    color: #555;
+    font-size: 30px;
+    font-weight: bold;
+    padding-bottom: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.product-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    height: 80%;
+    width: 90%;
+}
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 200px;
+    height: 220px;
+    margin: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-color: #fff;
+}
+
+.product-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+}
+
+.product-item-link {
+    text-decoration: none;
+}
+
+.product-item img {
+    width: 100%;
+    object-fit: cover;
+    max-height: 163px;
+    min-height: 163px;
+    border-bottom: 2px solid #ccc;
+}
+
+.product-item-info {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    padding-left: 5px;
+    justify-content: flex-start;
+    color: #444;
+    flex-grow: 1;
+}
+
+.product-item-info h3 {
+    margin: 0;
+    font-size: .9rem;
+    opacity: .8;
+}
+
+.product-item-info span {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+@media screen and (min-width: 1800px) {
+    .product-item {
+        width: 250px;
+        height: 280px;
+    }
+
+    .product-item img {
+        max-height: 220px;
+    }
+
+    .product-item-info {
+        width: 250px;
+    }
+
+    .product-item-info h3 {
+        font-size: 1rem;
+    }
+
+    .product-item-info span {
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .product-item {
+        min-width: fit-content;
+        height: 180px;
+    }
+
+    .product-item img {
+        max-height: 130px;
+        min-height: 130px;
+    }
+
+    .product-item-info {
+        width: 150px;
+    }
+
+    .product-item-info h3 {
+        font-size: .7rem;
+    }
+
+    .product-item-info span {
+        font-size: .9rem;
+    }
+
+    .section-title {
+        font-size: 25px;
+    }
+}

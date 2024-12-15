@@ -8,6 +8,7 @@ export const GlobalContextProvider = ({ children }) => {
     const [image, setImage] = useState('')
     const [showResults, setShowResults] = useState(false)
     const [loading, setLoading] = useState(false)
+    const categories = ['Home', 'Electronics', 'Clothing', 'Toys', 'Books', 'Health', 'Others']
 
     const handleChangeFile = (evento) => {
         const file_found = evento.target.files[0]
@@ -61,7 +62,8 @@ export const GlobalContextProvider = ({ children }) => {
             setCondicionMenu,
             logout,
             loading,
-            setLoading
+            setLoading,
+            categories
         }}>
             {children}
         </GlobalContext.Provider>

@@ -1,7 +1,9 @@
 import React from 'react'
 import './ProductForm.css'
+import { useGlobalContext } from '../../GlobalContext.jsx'
 
 const ProductForm = ({ handleSubmitCreateProductForm, handleChangeFile, image }) => {
+    const { categories } = useGlobalContext()
 
     return (
         <form className='create-product-form' onSubmit={handleSubmitCreateProductForm}>
@@ -17,13 +19,7 @@ const ProductForm = ({ handleSubmitCreateProductForm, handleChangeFile, image })
                 <div className='create-product-field'>
                     <label htmlFor="category-create">Category: </label>
                     <select name="category" id="category-create" required>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Clothing">Clothing</option>
-                        <option value="Home">Home</option>
-                        <option value="Toys">Toys</option>
-                        <option value="Books">Books</option>
-                        <option value="Health">Health</option>
-                        <option value="Beauty">Beauty</option>
+                        {categories.map((category) => <option value={category}>{category}</option>)}
                     </select>
                 </div>
                 <div className='button-container'>

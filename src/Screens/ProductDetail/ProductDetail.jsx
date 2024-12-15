@@ -14,7 +14,7 @@ import LoadingOverlay from '../../Components/LoadingOverlay/LoadingOverlay.jsx'
 const ProductDetail = () => {
     const { product_id } = useParams()
     const [product, setProduct] = useState("")
-    const { image, handleChangeFile, setImage, loading, setLoading } = useGlobalContext()
+    const { image, handleChangeFile, setImage, loading, setLoading, categories } = useGlobalContext()
     const user_info = JSON.parse(sessionStorage.getItem('user_info'))
     const authorized = product.seller_id === user_info.id || user_info.role === 'admin'
     const [editMode, setEditMode] = useState(false)
@@ -22,6 +22,11 @@ const ProductDetail = () => {
     const [toggleDelete, setToggleDelete] = useState(false)
     const [deleteConfirm, setDeleteConfirm] = useState(false)
     const [editConfirm, setEditConfirm] = useState(false)
+    const [name, setName] = useState('')
+    const [price, setPrice] = useState('')
+    const [category, setCategory] = useState('')
+    const [stock, setStock] = useState('')
+    const [description, setDescription] = useState('')
 
     const navigate = useNavigate()
 
@@ -30,6 +35,11 @@ const ProductDetail = () => {
             const response = await GET(`https://backend-fp.vercel.app/api/products/${product_id}`)
             const data = response.payload.details
             setProduct(data)
+            setName(data.name)
+            setPrice(data.price)
+            setCategory(data.category)
+            setStock(data.stock)
+            setDescription(data.description)
         }
         getProduct()
     }, [product_id])
@@ -134,22 +144,16 @@ const ProductDetail = () => {
                         <div className='edit-product-left'>
                             <div className='edit-product-field'>
                                 <label htmlFor="name">Name: </label>
-                                <input className='edit-product-input' type="text" id="name" name="name" required maxLength="25" />
+                                <input className='edit-product-input' type="text" id="name" name="name" required maxLength="25" value={name} onChange={(e) => setName(e.target.value)} />
                             </div>
                             <div className='edit-product-field'>
                                 <label htmlFor="price">Price: </label>
-                                <input className='edit-product-input' type="number" id="price" name="price" required min="0" />
+                                <input className='edit-product-input' type="number" id="price" name="price" required min="0" value={price} onChange={(e) => setPrice(e.target.value)} />
                             </div>
                             <div className='edit-product-field'>
                                 <label htmlFor="category">Category: </label>
-                                <select name="category" id="category" required>
-                                    <option value="Electronics">Electronics</option>
-                                    <option value="Clothing">Clothing</option>
-                                    <option value="Home">Home</option>
-                                    <option value="Toys">Toys</option>
-                                    <option value="Books">Books</option>
-                                    <option value="Health">Health</option>
-                                    <option value="Beauty">Beauty</option>
+                                <select name="category" id="category" required value={category} onChange={(e) => setCategory(e.target.value)}>
+                                    {categories.map((category) => <option value={category}>{category}</option>)}
                                 </select>
                             </div>
                             <div className='edit-button-container'>
@@ -160,11 +164,11 @@ const ProductDetail = () => {
                         <div className='edit-product-right'>
                             <div className='edit-product-field'>
                                 <label htmlFor="stock">Stock: </label>
-                                <input className='edit-product-input' type="number" id="stock" name="stock" required min="0" max="100" />
+                                <input className='edit-product-input' type="number" id="stock" name="stock" required min="0" max="100" value={stock} onChange={(e) => setStock(e.target.value)} />
                             </div>
                             <div className='edit-product-field edit-image'>
                                 <label htmlFor="image">Image: </label>
-                                <input className='edit-product-image' type="file" id="image" name="image" onChange={handleChangeFile} required />
+                                <input className='edit-product-image' type="file" id="image" name="image" onChange={handleChangeFile} required  />
                                 {image
                                     ?
                                     <span><i className="bi bi-check2"></i></span>
@@ -173,7 +177,7 @@ const ProductDetail = () => {
                             </div>
                             <div className='edit-product-field'>
                                 <label htmlFor="description">Description: </label>
-                                <textarea rows="5" cols="50" maxLength={"255"} className='edit-product-textarea' type="text" id="description" name="description" required />
+                                <textarea rows="5" cols="50" maxLength={"255"} className='edit-product-textarea' type="text" id="description" name="description" required value={description} onChange={(e) => setDescription(e.target.value)} />
                             </div>
                         </div>
                     </form>
