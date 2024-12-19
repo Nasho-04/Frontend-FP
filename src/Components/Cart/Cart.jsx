@@ -11,7 +11,7 @@ const Cart = () => {
 
     const getCart = async () => {
         try {
-            const response = await GET('https://backend-fp.vercel.app/api/products/cart/')
+            const response = await GET('https://backend-fp.vercel.app/api/products/cart')
             if (response.ok) {
                 const cart = response.payload.details
                 for (const item in cart) {
