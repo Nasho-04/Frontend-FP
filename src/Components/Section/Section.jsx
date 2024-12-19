@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 const Section = ({ category_array, category_name }) => {
-    const [showAll, setShowAll] = useState(2)
+    const [showAll, setShowAll] = useState(9)
 
     return (
         <section className="section">
@@ -28,10 +28,10 @@ const Section = ({ category_array, category_name }) => {
                     )
                 })}
                 {
-                    category_array.length > 2
+                    category_array.length > 9
                     ?<article className='product-item show-all'>
-                        {showAll > 2
-                            ? <span onClick={() => setShowAll(2)} className='show-all-btn'>Show less <br />-</span>
+                        {showAll > 9
+                            ? <span onClick={() => setShowAll(9)} className='show-all-btn'>Show less <br />-</span>
                             : <span onClick={() => setShowAll(category_array.length)} className='show-all-btn'>Show all <br />+</span>
                         }
                     </article>

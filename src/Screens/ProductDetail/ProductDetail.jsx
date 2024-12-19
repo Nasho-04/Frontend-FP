@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { GET, PUT, DELETE } from '../../utils/POST'
+import { GET, PUT, DELETE, POST } from '../../utils/POST'
 import { useState, useEffect } from 'react'
 import Navbar from '../../Components/Navbar/Navbar.jsx'
 import './ProductDetail.css'
@@ -27,6 +27,22 @@ const ProductDetail = () => {
     const [category, setCategory] = useState('')
     const [stock, setStock] = useState('')
     const [description, setDescription] = useState('')
+    const [cart, setCart] = useState([])
+
+    useEffect(() => {
+        const getCart = async () => {
+            try {
+                const response = await GET('https://backend-fp.vercel.app/api/products/cart/')
+                if (response.ok) {
+                    const cart = response.payload.details
+                    return setCart(cart)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getCart()
+    }, [])
 
     const navigate = useNavigate()
 
@@ -90,8 +106,7 @@ const ProductDetail = () => {
         }
     }
 
-    const addToCart = () => {
-        const cart = JSON.parse(sessionStorage.getItem('cart'))
+    const addToCart = (product_id) => {
         let included = false
         for (const item in cart) {
             if (cart[item]._id === product_id) {
@@ -99,9 +114,10 @@ const ProductDetail = () => {
             }
         }
         if (!included) {
-            cart.push(product)
-            sessionStorage.setItem('cart', JSON.stringify(cart))
-            window.location.reload()
+            const response = POST(`https://backend-fp.vercel.app/api/products/cart/${product_id}`)
+            if (response.ok) {
+                setCart([...cart, product])
+            }
         }
     }
 
@@ -153,7 +169,7 @@ const ProductDetail = () => {
                             <div className='edit-product-field'>
                                 <label htmlFor="category">Category: </label>
                                 <select name="category" id="category" required value={category} onChange={(e) => setCategory(e.target.value)}>
-                                    {categories.map((category) => <option value={category}>{category}</option>)}
+                                    {categories.map((category) => <option value={category} key={category}>{category}</option>)}
                                 </select>
                             </div>
                             <div className='edit-button-container'>
