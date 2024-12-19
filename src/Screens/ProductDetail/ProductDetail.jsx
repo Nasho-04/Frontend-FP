@@ -109,7 +109,7 @@ const ProductDetail = () => {
     const addToCart = (product_id) => {
         let included = false
         for (const item in cart) {
-            if (cart[item]._id === product_id) {
+            if (cart[item]._id == product_id) {
                 included = true
             }
         }
