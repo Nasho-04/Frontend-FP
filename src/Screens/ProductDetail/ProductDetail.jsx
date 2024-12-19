@@ -114,7 +114,7 @@ const ProductDetail = () => {
             }
         }
         if (!included) {
-            const response = POST(`https://backend-fp.vercel.app/api/products/cart/${product_id}`)
+            const response = POST(`https://backend-fp.vercel.app/api/cart/${product_id}`)
             if (response.ok) {
                 setCart([...cart, product])
             }

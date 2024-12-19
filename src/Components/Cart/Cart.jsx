@@ -11,16 +11,14 @@ const Cart = () => {
 
     const getCart = async () => {
         try {
-            const response = await GET('https://backend-fp.vercel.app/api/products/cart')
+            const response = await GET('https://backend-fp.vercel.app/api/cart/')
             if (response.ok) {
-                const cart = response.payload.details
-                for (const item in cart) {
-                    if (item.user_id === JSON.parse(sessionStorage.getItem('user_info')).id) {
-                        setCart(...cart, item)
-                    }
+                const cart = response.payload.details 
+                console.log(cart)
+                return setCart(cart)
                 }
             }
-        } catch (error) {
+            catch (error) {
             console.log(error)
         }
     }
