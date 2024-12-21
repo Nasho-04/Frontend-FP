@@ -181,6 +181,10 @@
     position: relative;
 }
 
+.image label {
+    width: fit-content;
+}
+
 .image span {
     position: absolute;
     top: 50%;

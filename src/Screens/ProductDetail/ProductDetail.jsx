@@ -22,6 +22,7 @@ const ProductDetail = () => {
     const [toggleDelete, setToggleDelete] = useState(false)
     const [deleteConfirm, setDeleteConfirm] = useState(false)
     const [editConfirm, setEditConfirm] = useState(false)
+    const [addConfirm, setAddConfirm] = useState(false)
     const [toggleRepeat, setToggleRepeat] = useState(false)
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
@@ -31,7 +32,7 @@ const ProductDetail = () => {
 
     useEffect(() => {
         getCart()
-    }, []) 
+    }, [cart]) 
 
     const navigate = useNavigate()
 
@@ -111,6 +112,7 @@ const ProductDetail = () => {
                     cart.push(response.payload.details)
                     setToggleAdd(false)
                     setLoading(false)
+                    setAddConfirm(true)
                 }
             }
         } catch (error) {
@@ -130,7 +132,7 @@ const ProductDetail = () => {
                                 <img src={product.image} alt={product.name} />
                             </div>
                             <div className='product-detail-info-container'>
-                                <span>
+                                <span className='product-detail-info'>
                                     <h1 className='product-detail-title'>{product.name}</h1>
                                     <span className='product-detail-price'>ARS ${product.price}</span>
                                     <p className='product-detail-stock'>Available stock: {product.stock}</p>
@@ -203,6 +205,7 @@ const ProductDetail = () => {
                 <Overlay toggle={toggleRepeat} setToggle={setToggleRepeat} product={product} btnFunction={() => {
                     setToggleRepeat(false) 
                     setToggleAdd(false)}} btnText1="Go back" text="Product already in your cart!" />
+                    <Overlay toggle={addConfirm} setToggle={setAddConfirm} product={product} btnFunction={() => setAddConfirm(false)} btnText1="Go Back" text="Product added successfully!" />
             </div>
         </>
     )

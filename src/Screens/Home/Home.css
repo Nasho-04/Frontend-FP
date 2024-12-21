@@ -12,6 +12,9 @@
     height: 100dvh;
     scroll-behavior: smooth;
     overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #777 #999;
 }
 
 .home-main {

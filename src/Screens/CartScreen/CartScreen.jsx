@@ -5,10 +5,12 @@ import CartProduct from '../../Components/CartProduct/CartProduct.jsx'
 import { useGlobalContext } from '../../GlobalContext.jsx'
 import { DELETE } from '../../utils/POST.js'
 import LoadingOverlay from '../../Components/LoadingOverlay/LoadingOverlay.jsx'
+import Overlay from '../../Components/Overlay/Overlay.jsx'
 
 const CartScreen = () => {
     const [total, setTotal] = useState(0)
     const [cart_products, setCart_products] = useState([])
+    const [toggleBuy, setToggleBuy] = useState(false)
     const { getCart, cart, setCart, getProductById, setLoading } = useGlobalContext()
 
     useEffect(()=> {
@@ -20,10 +22,10 @@ const CartScreen = () => {
             setLoading(true)
             for (let product of cart) {
                 product = await getProductById(product.product_id)
+                sum += product.price
+                setTotal(sum) 
                 if (!cart_products.find(item => item._id === product._id)) {
                     cart_products.push(product)
-                    sum += product.price
-                    setTotal(sum) 
                 }
             }
             setCart_products(cart_products)
@@ -67,10 +69,11 @@ const CartScreen = () => {
                 </div>
                 <div className='cart-total'>
                     <span className='cart-total-text'>Total: ${total}</span>
-                    <button className='buy-button'>Buy</button>
+                    <button className='buy-button' onClick={() => setToggleBuy(true)}>Buy</button>
                 </div>
             </div>
             <LoadingOverlay></LoadingOverlay>
+            <Overlay product={cart_products} toggle={toggleBuy} setToggle={setToggleBuy} text={'This feature is not available yet!'} btnFunction={() => setToggleBuy(false)} btnText1={'Go Back'}></Overlay>
         </div>
     )
 }

@@ -33,7 +33,7 @@ const ProductForm = ({ handleSubmitCreateProductForm, handleChangeFile, image })
                     <input className='create-product-input' type="number" id="stock" name="stock" required min="0" max="100" />
                 </div>
                 <div className='create-product-field image'>
-                    <label htmlFor="image">Image: </label>
+                    <label htmlFor="image">Image (max 2MB): </label>
                     <input className='create-product-image' type="file" id="image" name="image" onChange={handleChangeFile} required />
                     {image
                         ?
