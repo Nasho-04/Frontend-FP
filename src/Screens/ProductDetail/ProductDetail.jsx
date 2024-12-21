@@ -14,7 +14,7 @@ import LoadingOverlay from '../../Components/LoadingOverlay/LoadingOverlay.jsx'
 const ProductDetail = () => {
     const { product_id } = useParams()
     const [product, setProduct] = useState("")
-    const { image, handleChangeFile, setImage, loading, setLoading, categories } = useGlobalContext()
+    const { image, handleChangeFile, setImage, loading, setLoading, categories, getCart, cart, setCart } = useGlobalContext()
     const user_info = JSON.parse(sessionStorage.getItem('user_info'))
     const authorized = product.seller_id === user_info.id || user_info.role === 'admin'
     const [editMode, setEditMode] = useState(false)
@@ -22,27 +22,16 @@ const ProductDetail = () => {
     const [toggleDelete, setToggleDelete] = useState(false)
     const [deleteConfirm, setDeleteConfirm] = useState(false)
     const [editConfirm, setEditConfirm] = useState(false)
+    const [toggleRepeat, setToggleRepeat] = useState(false)
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [category, setCategory] = useState('')
     const [stock, setStock] = useState('')
     const [description, setDescription] = useState('')
-    const [cart, setCart] = useState([])
 
     useEffect(() => {
-        const getCart = async () => {
-            try {
-                const response = await GET('https://backend-fp.vercel.app/api/products/cart/')
-                if (response.ok) {
-                    const cart = response.payload.details
-                    return setCart(cart)
-                }
-            } catch (error) {
-                console.log(error)
-            }
-        }
         getCart()
-    }, [])
+    }, []) 
 
     const navigate = useNavigate()
 
@@ -106,18 +95,26 @@ const ProductDetail = () => {
         }
     }
 
-    const addToCart = (product_id) => {
-        let included = false
-        for (const item in cart) {
-            if (cart[item]._id == product_id) {
-                included = true
+    const addToCart = async (product_id) => {
+        try {
+            let included = false
+            for (const item in cart) {
+                if (cart[item].product_id == product_id) {
+                    included = true
+                    setToggleRepeat(true)
+                }
             }
-        }
-        if (!included) {
-            const response = POST(`https://backend-fp.vercel.app/api/cart/${product_id}`)
-            if (response.ok) {
-                setCart([...cart, product])
+            if (!included) {
+                setLoading(true)
+                const response = await POST(`https://backend-fp.vercel.app/api/cart/${product_id}`)
+                if (response.ok) {
+                    cart.push(response.payload.details)
+                    setToggleAdd(false)
+                    setLoading(false)
+                }
             }
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -203,6 +200,9 @@ const ProductDetail = () => {
                 <Overlay toggle={toggleDelete} setToggle={setToggleDelete} product={product} btnFunction={handleDeleteProduct} btnText1="Confirm" btnText2="Cancel" text="Are you sure you want to delete this product?" />
                 <Overlay toggle={deleteConfirm} setToggle={setDeleteConfirm} product={product} btnFunction={() => navigate(`/home`)} btnText1="Go Home" text="Product deleted successfully!" />
                 <Overlay toggle={editConfirm} setToggle={setEditConfirm} product={product} btnFunction={() => navigate(`/home`)} btnText1="Go Home" text="Product updated successfully!" />
+                <Overlay toggle={toggleRepeat} setToggle={setToggleRepeat} product={product} btnFunction={() => {
+                    setToggleRepeat(false) 
+                    setToggleAdd(false)}} btnText1="Go back" text="Product already in your cart!" />
             </div>
         </>
     )

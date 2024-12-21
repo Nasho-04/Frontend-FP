@@ -1,5 +1,6 @@
 import { useContext, createContext } from "react";
 import { useState, useEffect } from "react";
+import { GET } from "./utils/POST";
 
 const GlobalContext = createContext();
 
@@ -9,6 +10,30 @@ export const GlobalContextProvider = ({ children }) => {
     const [showResults, setShowResults] = useState(false)
     const [loading, setLoading] = useState(false)
     const categories = ['Home', 'Electronics', 'Clothing', 'Toys', 'Books', 'Health', 'Others']
+    const [cart, setCart] = useState([])
+
+    const getProductById = async (product_id) => {
+        const response = await GET(`https://backend-fp.vercel.app/api/products/${product_id}`)
+        return response.payload.details
+    }
+
+    const getCart = async () => {
+        try {
+            const response = await GET('https://backend-fp.vercel.app/api/cart/')
+            if (response.ok) {
+                const cart = response.payload.details
+                for (const item of cart) {
+                    if (item.user_id != JSON.parse(sessionStorage.getItem('user_info')).id) {
+                        cart.splice(cart.findIndex(product => product._id === item._id), 1)
+                    }
+                }
+                setCart(cart)
+                }
+            }
+            catch (error) {
+            console.log(error)
+        }
+    }
 
     const handleChangeFile = (evento) => {
         const file_found = evento.target.files[0]
@@ -28,8 +53,6 @@ export const GlobalContextProvider = ({ children }) => {
             }
         }
     }
-
-    const [cart, setCart] = useState([])
     const [count, setCount] = useState(0)
 
 
@@ -63,7 +86,9 @@ export const GlobalContextProvider = ({ children }) => {
             logout,
             loading,
             setLoading,
-            categories
+            categories,
+            getCart,
+            getProductById
         }}>
             {children}
         </GlobalContext.Provider>
