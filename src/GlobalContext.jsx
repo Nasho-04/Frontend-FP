@@ -22,12 +22,13 @@ export const GlobalContextProvider = ({ children }) => {
             const response = await GET('https://backend-fp.vercel.app/api/cart/')
             if (response.ok) {
                 const cart = response.payload.details
+                const new_cart = []
                 for (const item of cart) {
-                    if (item.user_id != JSON.parse(sessionStorage.getItem('user_info')).id) {
-                        cart.splice(cart.findIndex(product => product._id === item._id), 1)
+                    if (item.user_id == JSON.parse(sessionStorage.getItem('user_info')).id) {
+                        new_cart.push(item)
                     }
                 }
-                setCart(cart)
+                setCart(new_cart)
                 }
             }
             catch (error) {
