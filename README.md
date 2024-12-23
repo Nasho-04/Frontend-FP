@@ -1,8 +1,3 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este ptoyecto es el front de un e-commerce, en el cual los usuarios deben registrarse para poder entrar. El home consiste de secciones según las distintas categorías de productos y después hay diversas funcionalidades, como agregar al carrito, editar producto, eliminar producto, crear producto, eliminar del carrito y también un buscador.
+Para este proyecto usé React en la parte del front y node.js con express para el back, además de usar MongoDB para la base de datos.
+La mayor dificultad que encontré para el proyecto fue el diseño, y también el aprender a componetizar más el código y relizar mejores prácticas. Después me sentí bastante cómodo con las soluciones que se me ocurrieron para los diversos problemas que tuve que ir afrontando.
