@@ -32,7 +32,7 @@ const ProductDetail = () => {
 
     useEffect(() => {
         getCart()
-    }, [cart]) 
+    }, []) 
 
     const navigate = useNavigate()
 
