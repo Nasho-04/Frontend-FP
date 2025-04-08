@@ -14,6 +14,7 @@
     font-weight: bold;
     color: #111;
     border-bottom: 2px solid #111;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .cart-screen-container {
@@ -25,6 +26,7 @@
     padding-top: 20px;
     border-radius: 5px;
     border: 2px solid #111;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .cart-products-list {
@@ -50,6 +52,7 @@
     text-decoration: none;
     color: #fff;
     font-size: 18px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .cart-total-text {
@@ -64,12 +67,13 @@
     border: 1px solid #fefefe;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
     transition: background-color 0.3s ease;
     font-family: Arial, sans-serif;
     font-weight: bold;
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .buy-button:hover {

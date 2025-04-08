@@ -38,6 +38,10 @@ footer {
     text-decoration: underline;
 }
 
+.footer-contacts li i {
+    font-size: 20px;
+}
+
 @media screen and (min-width: 1700px) {
     .footer-contacts {
         font-size: 25px;

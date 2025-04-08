@@ -6,6 +6,7 @@ import { useGlobalContext } from '../../GlobalContext.jsx'
 import { DELETE } from '../../utils/POST.js'
 import LoadingOverlay from '../../Components/LoadingOverlay/LoadingOverlay.jsx'
 import Overlay from '../../Components/Overlay/Overlay.jsx'
+import Footer from '../../Components/Footer/Footer.jsx'
 
 const CartScreen = () => {
     const [total, setTotal] = useState(0)

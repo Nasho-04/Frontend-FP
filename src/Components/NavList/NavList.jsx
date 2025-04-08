@@ -17,7 +17,7 @@ const NavList = () => {
             <div className='navbar-list-container' onClick={() => setShowResults(false)}>
                 <ul className='navbar-list'>
                     <li><Link onClick={() => setCondicionMenu(false)} to='/home'>Home</Link></li>
-                    <li><a onClick={() => setCondicionMenu(false)} href="#footer">Contact</a></li>
+                    <li><a onClick={() => setCondicionMenu(false)} href="/home#footer">Contact</a></li>
                     <li><Link onClick={() => setCondicionMenu(false)} to='/product/new'>Add Product</Link></li>
                     <li><Link to='/' onClick={logout}>Logout</Link></li>
                 </ul>
